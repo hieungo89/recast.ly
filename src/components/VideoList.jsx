@@ -1,14 +1,14 @@
 import VideoListEntry from './VideoListEntry.js';
 
 var VideoList = ({videos}) => (
-  console.log('videos', videos),
-  console.log('videos.length', videos.length),
+  // console.log('videos', videos),
+  // console.log('videos.length', videos.length),
   <div className="video-list">
     <div><h5>{
       videos.map((video) => (
         <VideoListEntry video={video} key={video.id.videoId}/>
-      ))
-    }</h5></div>
+      ))}
+    </h5></div>
   </div>
 );
 
