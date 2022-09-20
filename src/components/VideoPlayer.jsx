@@ -1,5 +1,5 @@
-var VideoPlayer = ({videos}) => {
-  console.log('videoPlayer: ', videos);
+var VideoPlayer = ({video}) => {
+  // console.log('videoPlayer: ', video);
   // console.log('videoPlayer: ', props.video.id.videoId);
 
   // let videoId = props.video.id.videoId;
@@ -10,12 +10,12 @@ var VideoPlayer = ({videos}) => {
       <div className="embed-responsive embed-responsive-16by9">
         {/* <iframe className="embed-responsive-item" src={source} allowFullScreen></iframe> */}
 
-        <iframe className="embed-responsive-item" src={'https://www.youtube.com/embed/' + videos[0].id.videoId} allowFullScreen></iframe>
+        <iframe className="embed-responsive-item" src={'https://www.youtube.com/embed/' + video.id.videoId} allowFullScreen></iframe>
 
       </div>
       <div className="video-player-details">
-        <h3>{videos[0].snippet.title}</h3>
-        <div>{videos[0].snippet.description}</div>
+        <h3>{video.snippet.title}</h3>
+        <div>{video.snippet.description}</div>
       </div>
     </div>
   );
