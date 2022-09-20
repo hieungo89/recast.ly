@@ -4,7 +4,7 @@ import VideoList from './VideoList.js';
 import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
 
 const App = () => {
-  const [chosen, setChosen] = React.useState(false);
+  const [chosen, setChosen] = React.useState('');
 
 
 
@@ -27,7 +27,7 @@ const App = () => {
         </div>
         <div className="col-md-5">
           <div>
-            <h5 onClick={(event) => {console.log(event.target);}}>
+            <h5 onClick={(event) => { console.log(event.target); }}>
               <VideoList videos={exampleVideoData}/>
             </h5>
           </div>
