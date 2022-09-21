@@ -2,16 +2,20 @@ import Search from './Search.js';
 import VideoPlayer from './VideoPlayer.js';
 import VideoList from './VideoList.js';
 import searchYouTube from '../lib/searchYouTube.js';
-import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
+import exampleVideoData from '../data/exampleVideoData.js';
 
-console.log('searchYouTube', searchYouTube.callback);
+const { useState, useEffect } = React;
+
 const App = () => {
-  const [selectedVideo, setSelectedVideo] = React.useState(exampleVideoData[0]);
-  const [videosState, setVideos] = React.useState([]);
+
+  const [selectedVideo, setSelectedVideo] = useState(exampleVideoData[0]);
+  const [videosState, setVideos] = useState([]);
+  const [entry, setEntry] = useState('');
+  // console.log('videosState', videosState);
 
   const addSelection = (video) => {
     setSelectedVideo(video);
-    console.log('selectedVideo', selectedVideo);
+    // console.log('selectedVideo', selectedVideo);
   };
 
   const addVideo = (video) => {
@@ -19,33 +23,44 @@ const App = () => {
     // console.log('video', video);
   };
 
-  const useEffect = () => {
-    const useEffect = React.useEffect(searchYouTube);
-    return () => {
-      useEffect();
-    }
+  let timeout = null;
+
+  const searchHandler = (e) => {
+    let query = e.target.value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      searchYouTube(query, (videos => {
+        setVideos(videos);
+      }));
+    }, 5000);
   };
-  console.log('useEffect: ', useEffect());
+
+  useEffect(
+    () => {
+      searchYouTube(entry || 'cats', (data) => { setVideos(data); });
+    }, []
+  );
+
 
   return (
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><Search /></h5></div>
+          <div><h5><Search searchHandler={(e) => searchHandler(e)} /></h5></div>
         </div>
       </nav>
       <div className="row">
         <div className="col-md-7">
           <div>
             <h5>
-              <VideoPlayer video={selectedVideo}/>
+              <VideoPlayer video={selectedVideo} />
             </h5>
           </div>
         </div>
         <div className="col-md-5">
           <div>
             <h5>
-              <VideoList videos={exampleVideoData} addVideo={addVideo} addSelection={addSelection}/>
+              <VideoList videos={videosState} addVideo={addVideo} addSelection={addSelection} />
             </h5>
           </div>
         </div>

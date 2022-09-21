@@ -4,19 +4,27 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
   jqXHR.setRequestHeader('Authorization', API_KEY);
 });
 
-var searchYouTube = (query, callback, errorCB = null) => {
+var searchYouTube = (query, callback) => {
+  // $.get("https://app-hrsei-api.herokuapp.com/api/recastly/videos", {
+  //   key: YOUTUBE_API_KEY,
+  //   q: query
+  // }).done((data) => callback(data));
+
   $.ajax({
-    url: "https://app-hrsei-api.herokuapp.com/api/recastly/videos",
+    url: 'https://app-hrsei-api.herokuapp.com/api/recastly/videos',
     type: 'GET',
-    data: { q: query },
-    contentType: 'application/json',
-    success: function(response) {
-      callback(response);
+    data: {
+      key: YOUTUBE_API_KEY,
+      q: query,
+      type: 'video',
+      videoEmbeddable: true,
     },
-    error: errorCB || function(error) {
-      console.error('Error submitting GET request', error);
-    }
+    contentType: 'application/json',
+    success: function (data) {
+      callback(data);
+    },
   });
 };
+
 
 export default searchYouTube;
