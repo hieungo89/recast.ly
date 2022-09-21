@@ -2,12 +2,16 @@ import Search from './Search.js';
 import VideoPlayer from './VideoPlayer.js';
 import VideoList from './VideoList.js';
 import searchYouTube from '../lib/searchYouTube.js';
-import exampleVideoData from '/compiled/src/data/exampleVideoData.js';
+import exampleVideoData from '../data/exampleVideoData.js';
 
-console.log('searchYouTube', searchYouTube.callback);
+const { useState, useEffect } = React;
+
 const App = () => {
-  const [selectedVideo, setSelectedVideo] = React.useState(exampleVideoData[0]);
-  const [videosState, setVideos] = React.useState([]);
+
+  const [selectedVideo, setSelectedVideo] = useState(exampleVideoData[0]);
+  const [videosState, setVideos] = useState([]);
+  const [entry, setEntry] = useState('');
+  // console.log('videosState', videosState);
 
   const addSelection = (video) => {
     setSelectedVideo(video);
@@ -23,7 +27,7 @@ const App = () => {
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><Search /></h5></div>
+          <div><h5><Search searchHandler={(e) => searchHandler(e)} /></h5></div>
         </div>
       </nav>
       <div className="row">
@@ -37,12 +41,16 @@ const App = () => {
         <div className="col-md-5">
           <div>
             <h5>
-              <VideoList videos={exampleVideoData} addVideo={addVideo} addSelection={addSelection} />
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
+<<<<<<< HEAD
+  <VideoList videos={exampleVideoData} addVideo={addVideo} addSelection={addSelection} />
+=======
+              <VideoList videos={videosState} addVideo={addVideo} addSelection={addSelection} />
+>>>>>>> 415a95506e2916a94e079813344a42f9dd89a5db
+            </h5 >
+          </div >
+        </div >
+      </div >
+    </div >
   );
 };
 
