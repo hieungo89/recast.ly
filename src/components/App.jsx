@@ -23,6 +23,24 @@ const App = () => {
     // console.log('video', video);
   };
 
+  let timeout = null;
+
+  const searchHandler = (e) => {
+    let query = e.target.value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      searchYouTube(query, (videos => {
+        setVideos(videos);
+      }));
+    }, 5000);
+  };
+
+  useEffect(
+    () => {
+      searchYouTube(entry || 'cats', (data) => { setVideos(data); });
+    }, []
+  );
+
   return (
     <div>
       <nav className="navbar">
@@ -41,11 +59,7 @@ const App = () => {
         <div className="col-md-5">
           <div>
             <h5>
-<<<<<<< HEAD
-  <VideoList videos={exampleVideoData} addVideo={addVideo} addSelection={addSelection} />
-=======
               <VideoList videos={videosState} addVideo={addVideo} addSelection={addSelection} />
->>>>>>> 415a95506e2916a94e079813344a42f9dd89a5db
             </h5 >
           </div >
         </div >
