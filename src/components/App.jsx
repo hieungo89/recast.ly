@@ -32,7 +32,7 @@ const App = () => {
       searchYouTube(query, (videos => {
         setVideos(videos);
       }));
-    }, 5000);
+    }, 500);
   };
 
   useEffect(
@@ -40,6 +40,7 @@ const App = () => {
       searchYouTube(entry || 'cats', (data) => { setVideos(data); });
     }, []
   );
+
 
   return (
     <div>
@@ -60,11 +61,11 @@ const App = () => {
           <div>
             <h5>
               <VideoList videos={videosState} addVideo={addVideo} addSelection={addSelection} />
-            </h5 >
-          </div >
-        </div >
-      </div >
-    </div >
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-var VideoPlayer = ({ video }) => {
+var VideoPlayer = ({video}) => {
   // console.log('videoPlayer: ', video);
   // console.log('videoPlayer: ', props.video.id.videoId);
 
